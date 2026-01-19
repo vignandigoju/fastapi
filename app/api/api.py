@@ -1,12 +1,14 @@
 import json
 
-
-def read_user():
+def read_user(user_id: int):
     with open('data/users.json') as stream:
         users = json.load(stream)
 
-    return users
+    for user in users:
+        if user['id'] == user_id:
+            return user
 
+    return None
 
 def read_questions(position: int):
     with open('data/questions.json') as stream:
@@ -15,7 +17,6 @@ def read_questions(position: int):
     for question in questions:
         if question['position'] == position:
             return question
-
 
 def read_alternatives(question_id: int):
     alternatives_question = []
@@ -27,7 +28,6 @@ def read_alternatives(question_id: int):
             alternatives_question.append(alternative)
 
     return alternatives_question
-
 
 def create_answer(payload):
     answers = []
@@ -50,7 +50,6 @@ def create_answer(payload):
             result.append(car)
 
     return result
-
 
 def read_result(user_id: int):
     user_result = []
